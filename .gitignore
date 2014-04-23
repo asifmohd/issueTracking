@@ -1,5 +1,5 @@
 # my additions begin
-db.sqlite3
+*.sqlite3
 # my additions end
 # Byte-compiled / optimized / DLL files
 __pycache__/
