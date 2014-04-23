@@ -1,0 +1,32 @@
+{% extends "projectApp/base.html" %}
+{% load staticfiles %}
+
+{% block headContent %}
+    <title>Issues</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'projectApp/style.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li><a href="/projects">Projects</a></li>
+      <li><a href="/projects/{% with issues_list|first as firstIssue %}{{ firstIssue.project.id }}">{{ firstIssue.project.name }}{% endwith %}</a></li>
+      <li class="active">Issues</li>
+    </ol>
+    <br><br>
+    <h1>Issues</h1>
+    <br>
+    {% if issues_list %}
+        <ul style="margin: 0 auto; width: 50%;list-style-type: none;" class="Listcontainer">
+        {% for issue in issues_list %}
+            <li style="border:1px; border-radius: 5px;padding-bottom: 5px; font-size:16px;">
+                <a href = {% url 'projectApp:issueDetails' issue.id %}>{{ issue.issueName }}</a>
+                <br>
+                {{ issue.stepsToReproduce }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p> No Issues have been created yet. </p>
+    {% endif %}
+{% endblock %}

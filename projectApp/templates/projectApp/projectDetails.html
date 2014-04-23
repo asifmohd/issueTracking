@@ -1,0 +1,65 @@
+{% extends "projectApp/base.html" %}
+{% load staticfiles %}
+
+{% block headContent %}
+<title>{{ project.name }} Details</title>
+<link rel="stylesheet" type="text/css" href = "{% static 'projectApp/style.css'%}" />
+{% endblock %}
+
+{% block content %}
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li><a href="/projects">Projects</a></li>
+      <li class="active">{{ project.name }}</li>
+    </ol>
+    <br><br>
+    <h1 > {{ project.name }} </h1>
+    <p >Created by {{ project.createdBy }} on {{ project.createdOn }} </p>
+    <br>
+    <p style="width: 70%;margin: 0 auto;font-size: 30px;">
+    Details
+    </p>
+    <br>
+    <div style="width: 70%; margin: 0 auto;font-size: 20px;">
+        <p>{{ project.details}}</p>
+    </div>
+
+    <br><br>
+    <hr>
+    {% if project.issue_set.all %}
+        <p style="font-size: 35px; width: 100%;"> Issues </p>
+        {% for myIssue in project.issue_set.all %}
+            <ul>
+                <div id="issueWithVote">
+
+                    <div id="left">
+                        <a href="{% url 'projectApp:upvoteRequestUrl' myIssue.id %}">
+                            <img id = "upvote" src="{% static 'upvote.png' %}">
+                        </a>
+                        <br>
+                        <a href="{% url 'projectApp:downvoteRequestUrl' myIssue.id %}">
+                            <img id = "downvote" src="{% static 'downvote.png' %}">
+                        </a>
+                    </div>
+                    {# <div id="voteCountDiv"> #}
+
+                    {# </div> #}
+                    <div id="right">
+                        <li style="font-size:23px;">
+                            <a href = "{% url 'projectApp:issueDetails' myIssue.id %}">{{ myIssue.issueName }}
+                                {{ myIssue.hasUserVoted }}
+                            </a>
+                        </li>
+                    </div>
+                </div>
+
+            </ul>
+        {% endfor %}
+
+        <br><br>
+        <hr>
+        <br><br>
+        <p style="font-size: 20px;"><a href="{% url 'projectApp:issuesIndex' project.id %}">View all issues</a></p>
+    {% endif %}
+    <p style="font-size: 20px;"><a href="{% url 'projectApp:createIssue' project.id %}">Create a new issue</a></p>
+{% endblock %}

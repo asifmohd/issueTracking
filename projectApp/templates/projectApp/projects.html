@@ -1,0 +1,49 @@
+{% extends "projectApp/base.html" %}
+{% load staticfiles %}
+
+{% block projectBlock %}
+    <li class="active">
+{% endblock %}
+
+{% block headContent %}
+<title>Projects</title>
+<link rel="stylesheet" type="text/css" href="{% static 'projectApp/style.css' %}" />
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated%}
+<div id='userDiv'>
+    <h4 style="float:right;padding-right: 30px;"> Welcome {{ user.username }} </h4>
+    <br>
+</div>
+{% endif %}
+<div id="contentDiv">
+    <div class="ProjectIndex">
+        <h1>Projects</h1>
+        <br>
+        {% if projects_list %}
+            <ul class="Listcontainer">
+            {% for project in projects_list %}
+                <li>
+                    <div class="AProject">
+                        <a href = {% url 'projectApp:projectDetails' project.id %}>{{ project.name }}</a>
+                        {# <h3>Details</h3> #}
+                        <br>
+                        <div id="projectDetailDiv" style="width:70%; margin: 0 auto;">
+                            {{ project.details }}
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p> No Projects have been created </p>
+        {% endif %}
+    </div>
+    <br>
+    <div id="createProjectDiv">
+        <h3>
+            <a href={% url 'projectApp:createProject' %}>Create a new Project</a>
+        </h3>
+    </div>
+</div>
+{% endblock %}

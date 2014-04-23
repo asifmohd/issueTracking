@@ -1,0 +1,27 @@
+{% extends "projectApp/base.html" %}
+{% load staticfiles %}
+
+{% block headContent%}
+    <title>Create a new Project</title>
+    <link rel="stylesheet" type="text/css" href = "{% static 'userApp/style.css'%}" />
+{% endblock %}
+{% block content %}
+        <ol class="breadcrumb">
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li class="active"><b>Create Project</b></li>
+        </ol>
+        <br><br><br>
+        <div id="page-wrap">
+            <form action="" method="post" class="form">
+                {% csrf_token %}
+                {% load bootstrap3 %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                  <button type="submit" class="btn btn-primary">
+                      {% bootstrap_icon "star" %} Create Project
+                  </button>
+                {% endbuttons %}
+            </form>
+        </div>
+{% endblock %}

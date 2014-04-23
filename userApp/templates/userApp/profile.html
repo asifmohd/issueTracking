@@ -1,0 +1,29 @@
+{% extends "projectApp/base.html" %}
+{% load staticfiles %}
+
+{% block headContent %}
+    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'userApp/style.css' %}" />
+{% endblock %}
+
+{% block profileBlock %}
+    <li class="active">
+{% endblock %}
+
+{% block content %}
+    <div id="page-wrap">
+        <h3> Logged in as {{ user.username }}</h3>
+        <br><br>
+        <h5>Change Password</h5>
+        <form action="" method="post" class = "form">
+            {% csrf_token %}
+            {% load bootstrap3 %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "star" %} Save
+                </button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}

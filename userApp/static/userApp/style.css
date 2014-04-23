@@ -1,0 +1,76 @@
+body
+{
+    text-align: center;
+    /*color: blue;*/
+    /*background: #00f;*/
+
+}
+
+.breadcrumb
+{
+    float: left;
+}
+
+#loginFailed
+{
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+#page-wrap
+{
+    width: auto;
+    margin-right: auto;
+    margin-left: auto;
+    /*background: linear-gradient(to bottom, #9f00ff, #00f);*/
+}
+
+#page-wrap h1
+{
+    text-align: center;
+}
+
+#page-wrap .form
+{
+    clear: both;
+}
+
+#page-wrap .form-group
+{
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    width: 100%;
+    /*border: 1px solid;*/
+}
+
+#page-wrap .form-group .col-md-2
+{
+    clear: both;
+    display: none;
+}
+
+#page-wrap .form-group .col-md-4
+{
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    /*border: 1px solid;*/
+
+}
+/*This is the text box field*/
+#page-wrap .form-group .col-md-4 .form-control
+{
+    max-width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    /*border: 2px solid;*/
+    width: 70%;
+}
+
+#page-wrap hr
+{
+    border: 1px solid;
+}
+

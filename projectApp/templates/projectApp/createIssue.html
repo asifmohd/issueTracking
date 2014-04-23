@@ -1,0 +1,29 @@
+{% extends "projectApp/base.html" %}
+{% load staticfiles %}
+
+{% block headContent %}
+    <title>Create Issue</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'userApp/style.css' %}" />
+    <style type="text/css">
+        #id_stepsToReproduce {padding-bottom: 200px;}
+    </style>
+{% endblock %}
+{% block content %}
+{# <center> #}
+<div id="page-wrap">
+<h1> Create new Issue </h1>
+<hr>
+<br>
+<form action="" method="post">
+    {% csrf_token %}
+    {% load bootstrap3 %}
+    {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "star" %} Create Issue
+                </button>
+            {% endbuttons %}
+</form>
+</div>
+{# </center> #}
+{% endblock %}

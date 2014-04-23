@@ -1,0 +1,34 @@
+{% extends "projectApp/base.html" %}
+{% load staticfiles %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{# {% bootstrap_messages %} #}
+{% block headContent %}
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'userApp/style.css' %}" />
+{% endblock %}
+{% block signupBlock %}
+    <li class="active">
+{% endblock %}
+{% block content %}
+<div id="page-wrap">
+    {% load bootstrap3 %}
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li class="active">Sign Up</li>
+    </ol>
+    <br>
+    <form action="" method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                {% bootstrap_icon "star" %} Sign Up
+            </button>
+        {% endbuttons %}
+    </form>
+    {% if state %}
+        <div class="alert alert-danger" id="loginFailed">{{ state }}</div>
+    {% endif %}
+</div>
+{% endblock %}

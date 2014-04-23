@@ -1,0 +1,48 @@
+{% extends "projectApp/base.html" %}
+{% load staticfiles %}
+{% block homeBlock %}
+    <li class="active">
+{% endblock %}
+
+{% block headContent %}
+    <link rel="stylesheet" type="text/css" href = "{% static 'projectApp/style.css'%} " />
+{% endblock %}
+
+{% block bodyBlock %}
+    <body style="background-image: url('{% static "nightsky.jpg"%}'); background-attachment: fixed; min-width: 100%; min-height: 100%;">
+{% endblock %}
+
+{% block content %}
+    <div id="imageHeader">
+        <h1>IssueHub</h1>
+        <p>Your one stop solution to issues</p>
+    </div>
+    <div id="homeRoot">
+        <h3>Ever wanted a place to manage all the bugs and issues of a project reported by users and developers to be collected all at one place.</h3>
+        <br>
+        <h3>To be able to comment and discuss the intricate details of the issue</h3>
+        <br>
+        <h3>To chime in reporting the same issue and vote on issues for priority </h3>
+        <br>
+        <h3>IssueHub is the place to achieve all of this.</h3>
+        <br>
+        <h3>Ever wanted a place to manage all the bugs and issues of a project reported by users and developers to be collected all at one place.</h3>
+        <br>
+        <h3>To be able to comment and discuss the intricate details of the issue</h3>
+        <br>
+        <h3>To chime in reporting the same issue and vote on issues for priority </h3>
+        <br>
+        <h3>IssueHub is the place to achieve all of this.</h3>
+        <br>
+        <h3>Ever wanted a place to manage all the bugs and issues of a project reported by users and developers to be collected all at one place.</h3>
+        <br>
+        <h3>To be able to comment and discuss the intricate details of the issue</h3>
+        <br>
+        <h3>To chime in reporting the same issue and vote on issues for priority </h3>
+        <br>
+        <h3>IssueHub is the place to achieve all of this.</h3>
+        <br>
+    </div>
+
+
+{% endblock %}

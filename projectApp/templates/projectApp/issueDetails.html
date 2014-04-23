@@ -1,0 +1,97 @@
+{% extends "projectApp/base.html" %}
+{% load staticfiles %}
+{% block headContent %}
+<link rel="stylesheet" type="text/css" href = "{% static "projectApp/style.css"%} " />
+<style>
+#page-wrap .form
+{
+    clear: both;
+}
+
+#page-wrap .form-group
+{
+    display: inline-block;
+    width: 100%;
+    /*border: 1px solid;*/
+}
+
+#page-wrap .form-group .col-md-2
+{
+    clear: both;
+    display: none;
+}
+
+#page-wrap .form-group .col-md-4
+{
+    clear: both;
+    width: 100%;
+    margin-left: -15px;
+    /*border: 1px solid;*/
+
+}
+/*This is the text box field*/
+#page-wrap .form-group .col-md-4 .form-control
+{
+    max-width: 500px;
+    width: 70%;
+}
+#page-wrap .btn-primary
+{
+    float: left;
+
+}
+</style>
+{% endblock %}
+
+
+{% block content %}
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li><a href="/projects">Projects</a></li>
+      <li><a href="/projects/{{ issue.project.id }}">{{ issue.project.name }}</a></li>
+      <li class="active">{{ issue.issueName }}</li>
+    </ol>
+    <br><br><br>
+<div id="issueDetailsDiv">
+  <h1 style="display:inline;"> {{ issue.issueName }} </h1> reported by <b>{{ issue.reportedBy }}</b>
+  <hr>
+  <h3 style="font-size: 30px;"> Steps to Reproduce the Issue</h3>
+  <p style="font-size: 20px;"> {{ issue.stepsToReproduce }} </p>
+  <hr>
+  <div id="commentDiv">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Comments</div>
+      <div class="panel-body">
+        <p> Have something to discuss. Comment Here!
+      </div>
+
+      <!-- List group -->
+      <ul class="list-group">
+        {% for comment in issue.comment_set.all %}
+        <li class="list-group-item">
+          {{ comment.comment }}
+          <br>
+          <div id = "otherPartComment">
+            by {{ comment.commentedBy }} at {{ comment.time }}
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+  </div>
+  <div id="page-wrap">
+    <div id="commentPostDiv">
+      <form action="" id = "commentForm" method="post" class="form">
+        {% csrf_token %}
+        {% load bootstrap3 %}
+        {% bootstrap_form form %}
+        {% buttons %}
+          <button type="submit" class="btn btn-primary">
+              {% bootstrap_icon "star" %} Submit Comment
+          </button>
+        {% endbuttons %}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
