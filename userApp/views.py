@@ -18,11 +18,23 @@ class ProfileForm(forms.Form):
 # Create your views here.
 
 def login(request):
-    c = {}
+    c = RequestContext(request)
+
     c.update(csrf(request))
+    if request.GET:
+        if 'next' in request.GET:
+            c['next'] = request.GET.get('next')
     # state = "Please Login"
     state = ""
     username = password = ''
+
+    # redirect the user if already logged in
+    if request.user.is_authenticated():
+        if request.GET.get('next') != None:
+            return HttpResponseRedirect(request.GET.get('next'))
+        else:
+            return HttpResponseRedirect('/')
+
     if request.POST:
         form = UserForm(request.POST)
         if form.is_valid():
@@ -33,7 +45,10 @@ def login(request):
             if myuser is not None:
                 if myuser.is_active:
                     auth_login(request, myuser)
-                    return HttpResponseRedirect('/projects')
+                    if request.POST['next'] != '' and request.POST['next'] != None:
+                        return HttpResponseRedirect(request.POST['next'])
+                    else:
+                        return HttpResponseRedirect('/')
             else:
                 state="Invalid Email Address or Password."
     else:
@@ -45,10 +60,17 @@ def login(request):
 
 
 def register(request):
-    c = {}
+    c = RequestContext(request)
     c.update(csrf(request))
     state = ""
     username = password = ''
+
+    # redirect the user if already logged in
+    if request.user.is_authenticated():
+        if request.GET.get('next') != None:
+            return HttpResponseRedirect(request.GET.get('next'))
+        else:
+            return HttpResponseRedirect('/')
     if request.POST:
         form = UserForm(request.POST)
         if form.is_valid():
@@ -58,7 +80,6 @@ def register(request):
                 User.objects.get(username=username)
             except User.DoesNotExist:
                 User.objects.create_user(username, username, password)
-                # return HttpResponse('You have successfully created your account. Please <a href="/user/login">login</a>')
                 return HttpResponseRedirect("/projects")
             state = "Email address already exists. Please Login or use another Email address"
     else:
@@ -76,12 +97,15 @@ def profile(request):
             password = form.cleaned_data['password']
             try:
                 myUser = User.objects.get(username=request.user)
+                myUser.set_password(form.cleaned_data['password'])
+                myUser.save()
+                logoutUser(request)
+                return HttpResponseRedirect('/')
             except:
                 return HttpResponse("An error occurred please try again.")
-            print myUser
     return render_to_response('userApp/profile.html', c)
 
 def logoutUser(request):
     logout(request)
-    return HttpResponseRedirect("/projects")
+    return HttpResponseRedirect("/")
 

@@ -1,6 +1,9 @@
 # my additions begin
 *.sqlite3
+myData.json
+*.dump
 # my additions end
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

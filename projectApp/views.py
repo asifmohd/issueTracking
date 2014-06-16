@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.core.context_processors import csrf
+from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
@@ -63,8 +64,9 @@ class IssueIndexView(generic.ListView):
     def get_queryset(self):
         return Issue.objects.filter(project=self.kwargs['pk'])
 
+@login_required(login_url="/user/login/")
 def createProject(request):
-    c = {}
+    c = RequestContext(request)
     c.update(csrf(request))
     projectName = projectDetails = ''
     if request.POST:
@@ -85,9 +87,9 @@ def createProject(request):
     c['form'] = form
     return render_to_response('projectApp/createProject.html', c)
 
-
+@login_required(login_url="/user/login/")
 def createIssue(request, pk):
-    c = {}
+    c = RequestContext(request)
     c.update(csrf(request))
     if request.POST:
         form = IssueForm(request.POST)
@@ -115,11 +117,13 @@ def aboutPage(request):
 def search(request):
     return HttpResponse("Search page")
 
+@login_required(login_url="/user/login/")
 def downvoteRequest(request, pk):
 
     print "Inside downvoteRequest with pk = ", pk
     return HttpResponseRedirect('/projects/' + str(Issue.objects.get(pk=pk).project_id))
 
+@login_required(login_url="/user/login/")
 def upvoteRequest(request, pk):
     print request.user
     print "Inside upvoteRequest with pk = ", pk
