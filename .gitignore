@@ -1,6 +1,7 @@
 # my additions begin
 *.sqlite3
 myData.json
+venv/
 *.dump
 # my additions end
 
