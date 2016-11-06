@@ -9,7 +9,7 @@ class User(models.Model):
         return self.email
 
 class Detail(models.Model):
-    email = models.ForeignKey(User, primary_key=True)
+    email = models.OneToOneField(User)
     full_name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
 

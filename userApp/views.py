@@ -9,11 +9,11 @@ from django import forms
 from django.template import RequestContext
 
 class UserForm(forms.Form):
-    email = forms.EmailField(widget=forms.TextInput(attrs={'autofocus':'autofocus', 'placeholder':'Email Address'}))
-    password = forms.CharField(max_length=200, widget=forms.PasswordInput)
+    email = forms.EmailField(label='', widget=forms.TextInput(attrs={'autofocus':'autofocus', 'placeholder':'Email Address'}))
+    password = forms.CharField(label='', max_length=200, widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
 
 class ProfileForm(forms.Form):
-    password = forms.CharField(widget=forms.PasswordInput, max_length=100)
+    password = forms.CharField(label='', widget=forms.PasswordInput(attrs={'autofocus':'autofocus', 'placeholder':'Password'}), max_length=100)
 
 # Create your views here.
 

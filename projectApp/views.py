@@ -13,15 +13,15 @@ from django import forms
 from django.template import RequestContext
 
 class IssueForm(forms.Form):
-    issueName = forms.CharField(max_length=200)
-    stepsToReproduce = forms.CharField(max_length=5000, widget=forms.Textarea(attrs={'rows':5, 'cols':80, 'placeholder': 'Steps To Reproduce'}))
+    issueName = forms.CharField(label='', max_length=200, widget=forms.TextInput(attrs={'autofocus':'autofocus', 'placeholder': 'Issue Name'}))
+    stepsToReproduce = forms.CharField(label='', max_length=5000, widget=forms.Textarea(attrs={'rows':5, 'cols':80, 'placeholder': 'Steps To Reproduce'}))
 
 class CommentForm(forms.Form):
-    comment = forms.CharField(max_length=5000, widget=forms.Textarea(attrs={'rows':5, 'cols':80}))
+    comment = forms.CharField(label='', max_length=5000, widget=forms.Textarea(attrs={'rows':5, 'cols':80}))
 
 class ProjectForm(forms.Form):
-    name = forms.CharField(max_length=200)
-    details = forms.CharField(max_length=5000, widget=forms.Textarea(attrs={'rows':10, 'cols':40}))
+    name = forms.CharField(label='Name', max_length=200)
+    details = forms.CharField(label='Details', max_length=5000, widget=forms.Textarea(attrs={'rows':10, 'cols':40}))
 
 
 class ProjectIndexView(generic.ListView):
