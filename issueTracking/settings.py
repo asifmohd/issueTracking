@@ -134,4 +134,5 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join('projectApp', 'static'),
+    os.path.join('userApp', 'static'),
 )
