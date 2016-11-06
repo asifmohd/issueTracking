@@ -2,6 +2,7 @@
 *.sqlite3
 myData.json
 venv/
+staticfiles/
 *.dump
 # my additions end
 
