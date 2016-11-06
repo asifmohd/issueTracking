@@ -17,11 +17,11 @@ class IssueForm(forms.Form):
     stepsToReproduce = forms.CharField(label='', max_length=5000, widget=forms.Textarea(attrs={'rows':5, 'cols':80, 'placeholder': 'Steps To Reproduce'}))
 
 class CommentForm(forms.Form):
-    comment = forms.CharField(label='', max_length=5000, widget=forms.Textarea(attrs={'rows':5, 'cols':80}))
+    comment = forms.CharField(label='', max_length=5000, widget=forms.Textarea(attrs={'rows':5, 'cols':80, 'placeholder': 'Comment'}))
 
 class ProjectForm(forms.Form):
-    name = forms.CharField(label='Name', max_length=200)
-    details = forms.CharField(label='Details', max_length=5000, widget=forms.Textarea(attrs={'rows':10, 'cols':40}))
+    name = forms.CharField(label='', max_length=200, widget=forms.TextInput(attrs={'placeholder': 'Project Name'}))
+    details = forms.CharField(label='', max_length=5000, widget=forms.Textarea(attrs={'rows':10, 'cols':40, 'placeholder': 'Project Details'}))
 
 
 class ProjectIndexView(generic.ListView):
