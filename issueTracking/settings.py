@@ -106,12 +106,6 @@ SESSION_COOKIE_SECURE = True
 # postgresql database settings
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'asif',
-        'USER': 'asif',
-        'PASSWORD': '',
-        'HOST': "localhost",
-        'PORT': "5432",
     }
 }
 
