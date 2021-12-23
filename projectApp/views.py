@@ -49,7 +49,6 @@ class IssueDetailView(generic.DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        print request.POST
         commentText = request.POST["comment"]
         newComment = Comment(comment=commentText, time=timezone.now(), commentedOn=self.get_object(), commentedBy=request.user)
         newComment.save()
@@ -113,12 +112,8 @@ def search(request):
 
 @login_required(login_url="/user/login/")
 def downvoteRequest(request, pk):
-
-    print "Inside downvoteRequest with pk = ", pk
     return HttpResponseRedirect('/projects/' + str(Issue.objects.get(pk=pk).project_id))
 
 @login_required(login_url="/user/login/")
 def upvoteRequest(request, pk):
-    print request.user
-    print "Inside upvoteRequest with pk = ", pk
     return HttpResponseRedirect('/projects/' + str(Issue.objects.get(pk=pk).project_id))
