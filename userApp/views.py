@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.template.context_processors import csrf
 
 from django.http import HttpResponse, HttpResponseRedirect
@@ -18,9 +18,8 @@ class ProfileForm(forms.Form):
 # Create your views here.
 
 def login(request):
-    c = RequestContext(request)
+    c = {}
 
-    c.update(csrf(request))
     if request.GET:
         if 'next' in request.GET:
             c['next'] = request.GET.get('next')
@@ -55,13 +54,12 @@ def login(request):
         form = UserForm()
     c['state'] = state
     c['form'] = form
-    return render_to_response("userApp/login.html", c)
+    return render(request, "userApp/login.html", c)
 
 
 
 def register(request):
-    c = RequestContext(request)
-    c.update(csrf(request))
+    c = {}
     state = ""
     username = password = ''
 
@@ -86,10 +84,10 @@ def register(request):
         form = UserForm()
     c['form'] = form
     c['state'] = state
-    return render_to_response('userApp/signup.html', c)
+    return render(request, 'userApp/signup.html', c)
 
 def profile(request):
-    c = RequestContext(request)
+    c = {}
     c['form'] = ProfileForm()
     if request.POST:
         form = ProfileForm(request.POST)
@@ -103,7 +101,7 @@ def profile(request):
                 return HttpResponseRedirect('/')
             except:
                 return HttpResponse("An error occurred please try again.")
-    return render_to_response('userApp/profile.html', c)
+    return render(request, 'userApp/profile.html', c)
 
 def logoutUser(request):
     logout(request)

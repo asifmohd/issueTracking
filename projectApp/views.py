@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 
@@ -66,8 +66,6 @@ class IssueIndexView(generic.ListView):
 
 @login_required(login_url="/user/login/")
 def createProject(request):
-    c = RequestContext(request)
-    c.update(csrf(request))
     projectName = projectDetails = ''
     if request.POST:
         form = ProjectForm(request.POST)
@@ -84,13 +82,10 @@ def createProject(request):
             return HttpResponseRedirect("projects/" + str(newProject.id))
     else:
         form = ProjectForm()
-    c['form'] = form
-    return render_to_response('projectApp/createProject.html', c)
+    return render(request, 'projectApp/createProject.html', { 'form': form })
 
 @login_required(login_url="/user/login/")
 def createIssue(request, pk):
-    c = RequestContext(request)
-    c.update(csrf(request))
     if request.POST:
         form = IssueForm(request.POST)
         if form.is_valid():
@@ -104,15 +99,14 @@ def createIssue(request, pk):
             return HttpResponseRedirect("projects/" + str(project.id))
     else:
         form = IssueForm()
-    c['form'] = form
-    return render_to_response('projectApp/createIssue.html', c)
+    return render(request, 'projectApp/createIssue.html', { 'form': form })
 
 def homepage(request):
-    return render_to_response('projectApp/home.html', context_instance=RequestContext(request))
+    return render(request, 'projectApp/home.html', {})
     # return HttpResponse("this is the homepage")
 
 def aboutPage(request):
-    return render_to_response('projectApp/about.html', context_instance=RequestContext(request))
+    return render(request, 'projectApp/about.html', {})
 
 def search(request):
     return HttpResponse("Search page")
