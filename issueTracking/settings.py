@@ -71,11 +71,26 @@ MIDDLEWARE = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'issueTracking.urls'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+## Security related settings for deployment
+
+SECURE_HSTS_SECONDS = 60
+
+SECURE_SSL_REDIRECT = True
+
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+SECURE_HSTS_PRELOAD = True
+
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_SECURE = True
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
