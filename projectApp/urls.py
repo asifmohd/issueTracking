@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from projectApp import views
 
+app_name = 'projectApp'
 urlpatterns = [
                 url(r'^create$', views.createProject, name='createProject'),
                 url(r'downvote/(?P<pk>\d+)/$', views.downvoteRequest, name='downvoteRequestUrl'),
