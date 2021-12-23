@@ -75,6 +75,8 @@ MIDDLEWARE = (
 
 ROOT_URLCONF = 'issueTracking.urls'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
