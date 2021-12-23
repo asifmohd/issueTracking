@@ -28,7 +28,7 @@ def login(request):
     username = password = ''
 
     # redirect the user if already logged in
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         if request.GET.get('next') != None:
             return HttpResponseRedirect(request.GET.get('next'))
         else:
@@ -64,7 +64,7 @@ def register(request):
     username = password = ''
 
     # redirect the user if already logged in
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         if request.GET.get('next') != None:
             return HttpResponseRedirect(request.GET.get('next'))
         else:
