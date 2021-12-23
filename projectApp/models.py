@@ -7,18 +7,18 @@ class Project(models.Model):
     name = models.CharField(max_length=200)
     details = models.CharField(max_length=5000)
     createdOn = models.DateTimeField('Project Created on')
-    createdBy = models.ForeignKey(User)
+    createdBy = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.name
 
 class Issue(models.Model):
-    project = models.ForeignKey(Project)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     issueName = models.CharField(max_length=200)
     stepsToReproduce = models.CharField(max_length=5000)
     votes = models.IntegerField(default=0)
     reportedOn = models.DateTimeField('Issue Reported On')
-    reportedBy = models.ForeignKey(User)
+    reportedBy = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.issueName
@@ -42,15 +42,15 @@ class Issue(models.Model):
 class Comment(models.Model):
     comment = models.CharField(max_length=5000)
     time = models.DateTimeField('Commented on')
-    commentedOn = models.ForeignKey(Issue)
-    commentedBy = models.ForeignKey(User)
+    commentedOn = models.ForeignKey(Issue, on_delete=models.CASCADE)
+    commentedBy = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.comment
 
 class Vote(models.Model):
-    user = models.ForeignKey(User)
-    votedOn = models.ForeignKey(Issue)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    votedOn = models.ForeignKey(Issue, on_delete=models.CASCADE)
     value = models.IntegerField(default=0)
 
     def __unicode__(self):

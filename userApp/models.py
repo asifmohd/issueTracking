@@ -9,7 +9,7 @@ class User(models.Model):
         return self.email
 
 class Detail(models.Model):
-    email = models.OneToOneField(User)
+    email = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
 
