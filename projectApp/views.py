@@ -11,6 +11,7 @@ from projectApp.models import Project, Issue, Comment
 
 from django import forms
 from django.template import RequestContext
+from django.urls import reverse
 
 class IssueForm(forms.Form):
     issueName = forms.CharField(label='', max_length=200, widget=forms.TextInput(attrs={'autofocus':'autofocus', 'placeholder': 'Issue Name'}))
@@ -78,7 +79,7 @@ def createProject(request):
             # except:
                 # return HttpResponse("Error occurred.")
             # return HttpResponse("You have successfully created a project.")
-            return HttpResponseRedirect("projects/" + str(newProject.id))
+            return HttpResponseRedirect(reverse('projectApp:projectDetails', args=(newProject.id,)))
     else:
         form = ProjectForm()
     return render(request, 'projectApp/createProject.html', { 'form': form })
@@ -95,7 +96,7 @@ def createIssue(request, pk):
             newIssue = Issue(project=project, issueName=issueName, stepsToReproduce=steps, reportedOn=reportedOn, reportedBy=request.user)
             newIssue.save()
             # return HttpResponse("successfully created a new issue")
-            return HttpResponseRedirect("projects/" + str(project.id))
+            return HttpResponseRedirect(reverse('projectApp:projectDetails', args=(project.id,)))
     else:
         form = IssueForm()
     return render(request, 'projectApp/createIssue.html', { 'form': form })
