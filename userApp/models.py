@@ -5,7 +5,7 @@ class User(models.Model):
     email = models.CharField(max_length=200, primary_key=True)
     password = models.CharField(max_length=200)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.email
 
 class Detail(models.Model):
@@ -13,5 +13,5 @@ class Detail(models.Model):
     full_name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.full_name

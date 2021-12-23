@@ -9,7 +9,7 @@ class Project(models.Model):
     createdOn = models.DateTimeField('Project Created on')
     createdBy = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class Issue(models.Model):
@@ -20,7 +20,7 @@ class Issue(models.Model):
     reportedOn = models.DateTimeField('Issue Reported On')
     reportedBy = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.issueName
 
     def calculateVotes(self):
@@ -45,7 +45,7 @@ class Comment(models.Model):
     commentedOn = models.ForeignKey(Issue, on_delete=models.CASCADE)
     commentedBy = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.comment
 
 class Vote(models.Model):
@@ -53,5 +53,5 @@ class Vote(models.Model):
     votedOn = models.ForeignKey(Issue, on_delete=models.CASCADE)
     value = models.IntegerField(default=0)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username + " voted on " + self.votedOn.issueName + " with value = " + str(self.value)
