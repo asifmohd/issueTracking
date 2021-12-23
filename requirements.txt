@@ -1,6 +1,6 @@
 dj-database-url==0.4.1
 dj-static==0.0.6
-Django==2.1.15
+Django==2.2.25
 django-bootstrap3==11.1.0
 django-jquery==1.9.1
 django-toolbelt==0.0.1
